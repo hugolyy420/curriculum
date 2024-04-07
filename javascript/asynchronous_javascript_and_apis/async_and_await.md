@@ -6,8 +6,10 @@ For example, the two code blocks below do the exact same thing. They both get in
 
 ```javascript
 function getPersonsInfo(name) {
-  return server.getPeople().then(people => {
-    return people.find(person => { return person.name === name });
+  return server.getPeople().then((people) => {
+    return people.find((person) => {
+      return person.name === name;
+    });
   });
 }
 ```
@@ -15,12 +17,14 @@ function getPersonsInfo(name) {
 ```javascript
 async function getPersonsInfo(name) {
   const people = await server.getPeople();
-  const person = people.find(person => { return person.name === name });
+  const person = people.find((person) => {
+    return person.name === name;
+  });
   return person;
 }
 ```
 
-The second example looks much more like the kind of functions you are used to writing. However, did you notice the `async` keyword before the function declaration? How about the `await` keyword before `server.getPeople()`?
+The second example look much more like the kind of functions you are used to writing. However, did you notice the `async` keyword before the function declaration? How about the `await` keyword before `server.getPeople()`?
 
 If you'd like to try running these functions on your own, paste the following code block representing a server before the function definitions. How this "server" works is not important and is just an abstraction. The goal here is so that you can see that both functions behave exactly the same and return a promise.
 
@@ -28,15 +32,15 @@ If you'd like to try running these functions on your own, paste the following co
 const server = {
   people: [
     {
-      name: "Odin",
+      name: 'Odin',
       age: 20,
     },
     {
-      name: "Thor",
+      name: 'Thor',
       age: 35,
     },
     {
-      name: "Freyja",
+      name: 'Freyja',
       age: 29,
     },
   ],
@@ -56,12 +60,12 @@ const server = {
 
 This section contains a general overview of topics that you will learn in this lesson.
 
- - Explain how you declare an `async` function.
- - Explain what the `async` keyword does.
- - Explain what the `await` keyword does.
- - Explain what an `async` function returns.
- - Explain what happens when an error is thrown inside an `async` function.
- - Explain how you can handle errors inside an `async` function.
+- Explain how you declare an `async` function.
+- Explain what the `async` keyword does.
+- Explain what the `await` keyword does.
+- Explain what an `async` function returns.
+- Explain what happens when an error is thrown inside an `async` function.
+- Explain how you can handle errors inside an `async` function.
 
 ### The async keyword
 
@@ -75,19 +79,19 @@ The `async` keyword can also be used with any of the ways a function can be crea
 const yourAsyncFunction = async () => {
   // do something asynchronously and return a promise
   return result;
-}
+};
 ```
 
 ```javascript
-anArray.forEach(async item => {
+anArray.forEach(async (item) => {
   // do something asynchronously for each item in 'anArray'
   // one could also use .map here to return an array of promises to use with 'Promise.all()'
 });
 ```
 
 ```javascript
-server.getPeople().then(async people => {
-  people.forEach(person => {
+server.getPeople().then(async (people) => {
+  people.forEach((person) => {
     // do something asynchronously for each person
   });
 });
@@ -102,8 +106,8 @@ server.getPeople().then(async people => {
 Handling errors in `async` functions is very easy. Promises have the `.catch()` method for handling rejected promises, and since async functions just return a promise, you can call the function, and append a `.catch()` method to the end.
 
 ```javascript
-asyncFunctionCall().catch(err => {
-  console.error(err)
+asyncFunctionCall().catch((err) => {
+  console.error(err);
 });
 ```
 
@@ -113,7 +117,9 @@ But there is another way: the mighty `try/catch` block! If you want to handle th
 async function getPersonsInfo(name) {
   try {
     const people = await server.getPeople();
-    const person = people.find(person => { return person.name === name });
+    const person = people.find((person) => {
+      return person.name === name;
+    });
     return person;
   } catch (error) {
     // Handle the error any way you'd like
@@ -144,17 +150,17 @@ Since `await` does not work on the global scope, we will have to create an `asyn
 
 ```javascript
 <script>
-  const img = document.querySelector('img');
-
-  async function getCats() {
-    fetch('https://api.giphy.com/v1/gifs/translate?api_key=YOUR_KEY_HERE&s=cats', {mode: 'cors'})
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(response) {
-        img.src = response.data.images.original.url;
-      })
-  }
+  const img = document.querySelector('img'); async function getCats(){' '}
+  {fetch(
+    'https://api.giphy.com/v1/gifs/translate?api_key=YOUR_KEY_HERE&s=cats',
+    { mode: 'cors' }
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      img.src = response.data.images.original.url;
+    })}
 </script>
 ```
 
@@ -217,12 +223,12 @@ This code will behave exactly like the code from the last lesson; it just looks 
 
 This section contains questions for you to check your understanding of this lesson. If you’re having trouble answering the questions below on your own, review the material above to find the answer.
 
- - [How do you declare an `async` function?](#the-async-keyword)
- - [What does the `async` keyword do?](#the-async-keyword)
- - [What does the `await` keyword do?](#the-await-keyword)
- - [What is returned from an `async` function?](https://javascript.info/async-await#summary)
- - [What happens when an error is thrown inside an `async` function?](https://javascript.info/async-await#error-handling)
- - [How can you handle errors inside an `async` function?](https://javascript.info/async-await#error-handling)
+- [How do you declare an `async` function?](#the-async-keyword)
+- [What does the `async` keyword do?](#the-async-keyword)
+- [What does the `await` keyword do?](#the-await-keyword)
+- [What is returned from an `async` function?](https://javascript.info/async-await#summary)
+- [What happens when an error is thrown inside an `async` function?](https://javascript.info/async-await#error-handling)
+- [How can you handle errors inside an `async` function?](https://javascript.info/async-await#error-handling)
 
 ### Additional resources
 
